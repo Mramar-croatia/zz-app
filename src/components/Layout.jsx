@@ -37,33 +37,33 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
         transition-all duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
-        ${sidebarCollapsed ? 'lg:w-20' : 'lg:w-64'}
+        ${sidebarCollapsed ? 'lg:w-20' : 'lg:w-72'}
       `}>
         <div className="flex flex-col h-full">
           {/* Logo Section */}
           <div className={`
-            flex items-center gap-3 p-4 border-b border-surface-100
+            flex items-center gap-4 p-5 border-b border-surface-100
             ${sidebarCollapsed ? 'lg:justify-center' : ''}
           `}>
-            <Logo size={sidebarCollapsed ? 40 : 44} />
+            <Logo size={sidebarCollapsed ? 44 : 48} />
             {!sidebarCollapsed && (
               <div className="flex-1 min-w-0">
-                <h1 className="font-display font-bold text-lg text-brand-purple truncate">
+                <h1 className="font-display font-bold text-xl text-brand-purple truncate">
                   Zlatni Zmaj
                 </h1>
-                <p className="text-xs text-surface-500 truncate">Volonteri</p>
+                <p className="text-sm text-surface-500 truncate">Volonteri</p>
               </div>
             )}
             <button
               onClick={() => setSidebarOpen(false)}
               className="p-2 -mr-2 lg:hidden hover:bg-surface-100 rounded-lg"
             >
-              <X className="w-5 h-5 text-surface-500" />
+              <X className="w-6 h-6 text-surface-500" />
             </button>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -81,7 +81,7 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
                   `}
                   title={sidebarCollapsed ? item.label : undefined}
                 >
-                  <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? '' : 'text-surface-400'}`} />
+                  <Icon className={`w-6 h-6 flex-shrink-0 ${isActive ? '' : 'text-surface-400'}`} />
                   {!sidebarCollapsed && (
                     <span className="truncate">{item.label}</span>
                   )}
@@ -110,34 +110,34 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
       {/* Main Content */}
       <div className={`
         transition-all duration-300
-        ${sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'}
+        ${sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'}
       `}>
         {/* Top Header */}
         <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-lg border-b border-surface-100">
-          <div className="flex items-center gap-4 px-4 py-3 lg:px-6">
+          <div className="flex items-center gap-4 px-4 py-4 lg:px-8">
             <button
               onClick={() => setSidebarOpen(true)}
               className="p-2 -ml-2 lg:hidden hover:bg-surface-100 rounded-lg"
             >
-              <Menu className="w-5 h-5 text-surface-700" />
+              <Menu className="w-6 h-6 text-surface-700" />
             </button>
 
             <div className="flex-1 min-w-0">
-              <h2 className="font-display font-semibold text-lg text-surface-900">
+              <h2 className="font-display font-semibold text-xl lg:text-2xl text-surface-900">
                 {NAV_ITEMS.find(i => i.id === activeTab)?.label}
               </h2>
-              <p className="text-xs text-surface-500 hidden sm:block">
+              <p className="text-sm lg:text-base text-surface-500 hidden sm:block">
                 {NAV_ITEMS.find(i => i.id === activeTab)?.description}
               </p>
             </div>
 
             {/* Hero Stats Bar */}
             {heroStats && (
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-6 lg:gap-8">
                 {heroStats.map((stat, index) => (
                   <div key={index} className="text-right">
-                    <p className="text-xs text-surface-500">{stat.label}</p>
-                    <p className="font-display font-bold text-brand-purple">{stat.value}</p>
+                    <p className="text-sm lg:text-base text-surface-500">{stat.label}</p>
+                    <p className="font-display font-bold text-brand-purple text-lg lg:text-xl">{stat.value}</p>
                   </div>
                 ))}
               </div>
@@ -146,7 +146,7 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
         </header>
 
         {/* Page Content */}
-        <main className="p-4 lg:p-6">
+        <main className="p-4 lg:p-8">
           {children}
         </main>
       </div>

@@ -40,9 +40,9 @@ function App() {
   const renderModule = () => {
     switch (activeTab) {
       case 'baza':
-        return <Baza volunteers={volunteers} loading={loading} />;
+        return <Baza volunteers={volunteers} sessions={sessions} loading={loading} />;
       case 'termini':
-        return <Termini sessions={sessions} loading={loading} />;
+        return <Termini sessions={sessions} volunteers={volunteers} loading={loading} />;
       case 'statistika':
         return <Statistika statistics={statistics} loading={loading} onRefresh={refetchAll} />;
       case 'unos':

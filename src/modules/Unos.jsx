@@ -171,8 +171,8 @@ export default function Unos({ volunteers, loading }) {
       {/* Form Section */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-brand-purple" />
+          <CardTitle className="flex items-center gap-3">
+            <Calendar className="w-6 h-6 text-brand-purple" />
             Podaci o terminu
           </CardTitle>
         </CardHeader>
@@ -212,9 +212,9 @@ export default function Unos({ volunteers, loading }) {
       <Card>
         <CardHeader className="border-b border-surface-100">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <CardTitle className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-brand-purple" />
+            <div className="flex items-center gap-4">
+              <CardTitle className="flex items-center gap-3">
+                <Users className="w-6 h-6 text-brand-purple" />
                 Odabir volontera
               </CardTitle>
               <Badge variant={selectedVolunteers.size > 0 ? 'success' : 'default'}>
@@ -279,11 +279,11 @@ export default function Unos({ volunteers, loading }) {
           </div>
 
           {/* Volunteer List */}
-          <div className="max-h-[400px] overflow-y-auto scrollbar-thin border border-surface-200 rounded-xl">
+          <div className="max-h-[450px] overflow-y-auto scrollbar-thin border border-surface-200 rounded-xl">
             {filteredVolunteers.length === 0 ? (
-              <div className="text-center py-12">
-                <Users className="w-10 h-10 mx-auto text-surface-300 mb-3" />
-                <p className="text-surface-500">Nema pronađenih volontera</p>
+              <div className="text-center py-16">
+                <Users className="w-12 h-12 mx-auto text-surface-300 mb-4" />
+                <p className="text-lg text-surface-500">Nema pronađenih volontera</p>
               </div>
             ) : (
               <div className="divide-y divide-surface-100">
@@ -294,7 +294,7 @@ export default function Unos({ volunteers, loading }) {
                       key={`${volunteer.name}-${index}`}
                       onClick={() => toggleVolunteer(volunteer.name)}
                       className={`
-                        flex items-center gap-4 p-3 cursor-pointer transition-colors
+                        flex items-center gap-4 p-4 cursor-pointer transition-colors
                         ${isSelected
                           ? 'bg-brand-purple/5 hover:bg-brand-purple/10'
                           : 'hover:bg-surface-50'
@@ -302,7 +302,7 @@ export default function Unos({ volunteers, loading }) {
                       `}
                     >
                       <div className={`
-                        w-6 h-6 rounded-lg border-2 flex items-center justify-center
+                        w-7 h-7 rounded-lg border-2 flex items-center justify-center
                         transition-all flex-shrink-0
                         ${isSelected
                           ? 'bg-brand-purple border-brand-purple'
@@ -310,29 +310,28 @@ export default function Unos({ volunteers, loading }) {
                         }
                       `}>
                         {isSelected && (
-                          <Check className="w-4 h-4 text-white" />
+                          <Check className="w-5 h-5 text-white" />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className={`font-medium truncate ${isSelected ? 'text-brand-purple' : 'text-surface-900'}`}>
+                        <p className={`font-medium text-lg truncate ${isSelected ? 'text-brand-purple' : 'text-surface-900'}`}>
                           {volunteer.name}
                         </p>
-                        <p className="text-xs text-surface-500 truncate">
+                        <p className="text-sm text-surface-500 truncate">
                           {volunteer.school} • {volunteer.grade}. razred
                         </p>
                       </div>
-                      <div className="flex flex-wrap gap-1 max-w-[200px]">
+                      <div className="flex flex-wrap gap-1.5 max-w-[220px]">
                         {volunteer.locations?.slice(0, 2).map((loc, i) => (
                           <Badge
                             key={i}
                             variant={loc === location ? 'success' : 'default'}
-                            className="text-xs"
                           >
                             {loc}
                           </Badge>
                         ))}
                         {volunteer.locations?.length > 2 && (
-                          <Badge variant="default" className="text-xs">
+                          <Badge variant="default">
                             +{volunteer.locations.length - 2}
                           </Badge>
                         )}
@@ -347,14 +346,14 @@ export default function Unos({ volunteers, loading }) {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
+      <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
         <Button
           type="button"
           variant="secondary"
           onClick={handleReset}
           className="sm:order-1"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="w-5 h-5" />
           Resetiraj
         </Button>
         <Button
@@ -365,7 +364,7 @@ export default function Unos({ volunteers, loading }) {
           loading={submitting}
           className="sm:order-2"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-5 h-5" />
           Spremi termin
         </Button>
       </div>

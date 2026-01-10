@@ -45,10 +45,10 @@ export function TableHead({ children, sortable, sorted, direction, onSort, class
       <th className={`table-header ${className}`}>
         <button
           onClick={onSort}
-          className="flex items-center gap-1 hover:text-surface-700 transition-colors group"
+          className="flex items-center gap-1.5 hover:text-surface-700 transition-colors group"
         >
           <span>{children}</span>
-          <SortIcon className={`w-4 h-4 ${sorted ? 'text-brand-purple' : 'text-surface-300 group-hover:text-surface-400'}`} />
+          <SortIcon className={`w-5 h-5 ${sorted ? 'text-brand-purple' : 'text-surface-300 group-hover:text-surface-400'}`} />
         </button>
       </th>
     );
@@ -71,15 +71,15 @@ export function TableCell({ children, className = '' }) {
 
 export function EmptyState({ icon: Icon, title, description }) {
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-16">
       {Icon && (
-        <div className="inline-flex items-center justify-center w-12 h-12 bg-surface-100 rounded-full mb-4">
-          <Icon className="w-6 h-6 text-surface-400" />
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-surface-100 rounded-full mb-5">
+          <Icon className="w-8 h-8 text-surface-400" />
         </div>
       )}
-      <h3 className="font-semibold text-surface-700">{title}</h3>
+      <h3 className="font-semibold text-lg text-surface-700">{title}</h3>
       {description && (
-        <p className="mt-1 text-sm text-surface-500">{description}</p>
+        <p className="mt-2 text-base text-surface-500">{description}</p>
       )}
     </div>
   );

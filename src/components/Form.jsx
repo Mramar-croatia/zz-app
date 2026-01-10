@@ -50,11 +50,15 @@ export const Select = forwardRef(function Select(
   );
 });
 
-export function SearchInput({ value, onChange, onClear, placeholder = 'Pretraži...', className = '' }) {
+export const SearchInput = forwardRef(function SearchInput(
+  { value, onChange, onClear, placeholder = 'Pretraži...', className = '' },
+  ref
+) {
   return (
     <div className={`relative ${className}`}>
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-400" />
       <input
+        ref={ref}
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -71,7 +75,7 @@ export function SearchInput({ value, onChange, onClear, placeholder = 'Pretraži
       )}
     </div>
   );
-}
+});
 
 export function DateInput({ label, value, onChange, error, className = '', ...props }) {
   return (

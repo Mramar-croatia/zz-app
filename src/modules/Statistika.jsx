@@ -63,7 +63,7 @@ export default function Statistika({ statistics, loading, onRefresh }) {
       {/* Last Updated */}
       {lastUpdated && (
         <div className="flex items-center justify-between">
-          <p className="text-sm text-surface-500">
+          <p className="text-sm lg:text-base text-surface-500">
             Posljednje ažuriranje:{' '}
             <span className="font-medium text-surface-700">
               {new Date(lastUpdated).toLocaleString('hr-HR')}
@@ -71,9 +71,9 @@ export default function Statistika({ statistics, loading, onRefresh }) {
           </p>
           <button
             onClick={onRefresh}
-            className="flex items-center gap-2 text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+            className="flex items-center gap-2 text-sm lg:text-base text-brand-purple hover:text-brand-purple-dark font-medium"
           >
-            <RefreshCw className="w-4 h-4" />
+            <RefreshCw className="w-4 h-4 lg:w-5 lg:h-5" />
             Osvježi
           </button>
         </div>
@@ -98,9 +98,9 @@ export default function Statistika({ statistics, loading, onRefresh }) {
 
       {/* Charts */}
       {charts && charts.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
           {charts.map((chart, index) => (
-            <DynamicChart key={index} chart={chart} height={280} />
+            <DynamicChart key={index} chart={chart} height={350} />
           ))}
         </div>
       )}
@@ -143,11 +143,11 @@ export default function Statistika({ statistics, loading, onRefresh }) {
                             className={`table-cell ${cellIndex > 0 ? 'text-right' : ''}`}
                           >
                             {cellIndex === 0 ? (
-                              <span className="font-medium text-surface-900">
+                              <span className="font-medium text-surface-900 text-lg">
                                 {cell}
                               </span>
                             ) : (
-                              <span className="text-surface-600 tabular-nums">
+                              <span className="text-surface-600 tabular-nums text-lg">
                                 {cell}
                               </span>
                             )}
