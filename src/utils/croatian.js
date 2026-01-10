@@ -135,3 +135,58 @@ export function getUniqueYears(dates) {
   const years = new Set(dates.filter(Boolean).map(d => getYear(d)));
   return Array.from(years).sort((a, b) => b - a);
 }
+
+/**
+ * Format date in short format (e.g., "15. vel. 2025.")
+ * @param {Date|string} date - Date to format
+ * @returns {string} Formatted short date
+ */
+export function formatDateShort(date) {
+  if (!date) return '-';
+  const d = date instanceof Date ? date : new Date(date);
+  if (isNaN(d.getTime())) return '-';
+  return d.toLocaleDateString('hr-HR', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+/**
+ * Get relative time string in Croatian
+ * @param {Date|string} date - Date to compare
+ * @returns {string} Relative time string (e.g., "Prije 3 dana")
+ */
+export function getRelativeTime(date) {
+  if (!date) return 'Nikad';
+
+  const d = date instanceof Date ? date : new Date(date);
+  if (isNaN(d.getTime())) return 'Nikad';
+
+  const now = new Date();
+  const diffMs = now - d;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return 'Danas';
+  if (diffDays === 1) return 'Jučer';
+  if (diffDays < 7) return `Prije ${diffDays} dana`;
+  if (diffDays < 30) return `Prije ${Math.floor(diffDays / 7)} tjedana`;
+  if (diffDays < 365) return `Prije ${Math.floor(diffDays / 30)} mjeseci`;
+  return `Prije ${Math.floor(diffDays / 365)} godina`;
+}
+
+/**
+ * Format date for full display with day name
+ * @param {Date|string} date - Date to format
+ * @returns {string} Formatted date (e.g., "15. veljače 2025.")
+ */
+export function formatDateFull(date) {
+  if (!date) return '-';
+  const d = date instanceof Date ? date : new Date(date);
+  if (isNaN(d.getTime())) return '-';
+  return d.toLocaleDateString('hr-HR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}

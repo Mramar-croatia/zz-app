@@ -75,3 +75,6 @@ export { default as KeyboardShortcutsHelp } from './KeyboardShortcutsHelp';
 
 // Attendance Calendar
 export { default as AttendanceCalendar, AttendanceHeatmap } from './AttendanceCalendar';
+
+// Pagination
+export { default as Pagination } from './Pagination';
