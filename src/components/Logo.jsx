@@ -1,50 +1,13 @@
-export default function Logo({ size = 48, className = '' }) {
+﻿export default function Logo({ size = 48, className = '' }) {
+  const combinedClassName = ['rounded-full', 'object-cover', className].filter(Boolean).join(' ');
+
   return (
-    <svg
+    <img
+      src="/logo.png"
       width={size}
       height={size}
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      {/* Background Circle */}
-      <circle cx="32" cy="32" r="30" fill="url(#goldGradient)" />
-
-      {/* Dragon Shape */}
-      <g transform="translate(12, 14)">
-        {/* Dragon Body */}
-        <path
-          d="M35 18c-2-4-6-8-12-8-8 0-14 6-14 14s6 14 14 14c4 0 8-2 10-5l4 3c0 0-6 8-14 8C10 44 0 34 0 24S10 4 23 4c10 0 15 8 16 12l-4 2z"
-          fill="#4C1D95"
-        />
-        {/* Dragon Wing */}
-        <path
-          d="M28 12c4-4 10-6 12-4 2 2 0 8-4 12-2 2-6 4-8 4l-2-4c2-2 4-4 4-6s-2-2-2-2z"
-          fill="#6D28D9"
-        />
-        {/* Dragon Head/Crest */}
-        <path
-          d="M18 8c2-4 6-6 8-4s0 6-2 8c-1 1-3 2-4 2l-1-2c1-1 1-2 1-3s-2-1-2-1z"
-          fill="#4C1D95"
-        />
-        {/* Eye */}
-        <circle cx="15" cy="20" r="3" fill="#D4AF37" />
-        <circle cx="15.5" cy="19.5" r="1" fill="#4C1D95" />
-        {/* Flame/Breath */}
-        <path
-          d="M8 22c-2 0-4 2-6 1s0-3 2-4c1-1 3-1 4 0l-1 2c0 0-1 1 1 1z"
-          fill="#D4AF37"
-        />
-      </g>
-
-      {/* Gradient Definition */}
-      <defs>
-        <linearGradient id="goldGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#F4D03F" />
-          <stop offset="1" stopColor="#D4AF37" />
-        </linearGradient>
-      </defs>
-    </svg>
+      alt="Logo"
+      className={combinedClassName}
+    />
   );
 }

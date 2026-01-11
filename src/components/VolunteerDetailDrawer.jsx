@@ -341,7 +341,7 @@ export default function VolunteerDetailDrawer({
               <CardContent className="p-4 text-center">
                 <Clock className="w-6 h-6 mx-auto text-brand-purple mb-1" />
                 <p className="text-2xl font-bold text-surface-900">
-                  {volunteer.hours || 0}
+                  {volunteerSessions.length * 2}
                 </p>
                 <p className="text-xs text-surface-500">Sati</p>
               </CardContent>

@@ -1,154 +1,57 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState } from 'react';
 import {
-  Calendar,
-  MapPin,
-  Baby,
-  Users,
-  Search,
-  Check,
-  X,
-  AlertCircle,
-  CheckCircle2,
   Send,
   RotateCcw,
+  CheckCircle2,
+  Keyboard,
 } from 'lucide-react';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  SearchInput,
-  DateInput,
-  NumberInput,
-  Select,
   Button,
   Alert,
-  Badge,
-  Checkbox,
-  FilterChips,
   PageLoader,
+  SessionDetailDrawer,
 } from '../components';
+import {
+  EntryStatsPanel,
+  EntryFormCard,
+  VolunteerSelector,
+  RecentEntriesPreview,
+} from '../components/entry';
 import { useSubmitAttendance } from '../hooks/useApi';
-import { formatDateISO, sortCroatian } from '../utils/croatian';
+import useEntryForm from '../hooks/useEntryForm';
 
-export default function Unos({ volunteers, loading }) {
-  // Form state
-  const [selectedDate, setSelectedDate] = useState(formatDateISO(new Date()));
-  const [location, setLocation] = useState('');
-  const [childrenCount, setChildrenCount] = useState(0);
-  const [volunteerCount, setVolunteerCount] = useState(0);
-  const [selectedVolunteers, setSelectedVolunteers] = useState(new Set());
-
-  // UI state
-  const [search, setSearch] = useState('');
-  const [filterLocation, setFilterLocation] = useState('');
-  const [showSelected, setShowSelected] = useState(false);
+export default function Unos({ volunteers, sessions = [], loading }) {
+  // Form and filter state from custom hook
+  const form = useEntryForm(volunteers, sessions);
 
   // Submission hook
   const { submit, loading: submitting, error, success, reset } = useSubmitAttendance();
 
-  // Get unique locations
-  const locations = useMemo(() => {
-    if (!volunteers) return [];
-    const locs = new Set(volunteers.flatMap(v => v.locations || []));
-    return Array.from(locs).sort(sortCroatian);
-  }, [volunteers]);
-
-  // Filter volunteers for display
-  const filteredVolunteers = useMemo(() => {
-    if (!volunteers) return [];
-
-    let result = volunteers.filter(v => {
-      // Search filter
-      if (search) {
-        const searchLower = search.toLowerCase();
-        if (!v.name?.toLowerCase().includes(searchLower)) return false;
-      }
-
-      // Location filter (show volunteers who work at selected location)
-      if (filterLocation && !v.locations?.includes(filterLocation)) return false;
-
-      // Show only selected filter
-      if (showSelected && !selectedVolunteers.has(v.name)) return false;
-
-      return true;
-    });
-
-    return result.sort((a, b) => sortCroatian(a.name || '', b.name || ''));
-  }, [volunteers, search, filterLocation, showSelected, selectedVolunteers]);
-
-  // Auto-update volunteer count when selection changes
-  useEffect(() => {
-    setVolunteerCount(selectedVolunteers.size);
-  }, [selectedVolunteers]);
-
-  // When form location changes, optionally filter volunteer list
-  useEffect(() => {
-    if (location && !filterLocation) {
-      setFilterLocation(location);
-    }
-  }, [location]);
-
-  const toggleVolunteer = (name) => {
-    setSelectedVolunteers(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(name)) {
-        newSet.delete(name);
-      } else {
-        newSet.add(name);
-      }
-      return newSet;
-    });
-  };
-
-  const selectAll = () => {
-    const newSet = new Set(selectedVolunteers);
-    filteredVolunteers.forEach(v => newSet.add(v.name));
-    setSelectedVolunteers(newSet);
-  };
-
-  const deselectAll = () => {
-    if (filterLocation || search || showSelected) {
-      // Only deselect filtered ones
-      const newSet = new Set(selectedVolunteers);
-      filteredVolunteers.forEach(v => newSet.delete(v.name));
-      setSelectedVolunteers(newSet);
-    } else {
-      setSelectedVolunteers(new Set());
-    }
-  };
+  // UI state
+  const [showRecentEntries, setShowRecentEntries] = useState(true);
+  const [selectedSession, setSelectedSession] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     reset();
 
     try {
-      await submit({
-        selectedDate,
-        location,
-        childrenCount,
-        volunteerCount,
-        selected: Array.from(selectedVolunteers),
-      });
+      await submit(form.getFormData());
     } catch (err) {
       // Error handled by hook
     }
   };
 
   const handleReset = () => {
-    setSelectedDate(formatDateISO(new Date()));
-    setLocation('');
-    setChildrenCount(0);
-    setVolunteerCount(0);
-    setSelectedVolunteers(new Set());
-    setSearch('');
-    setFilterLocation('');
-    setShowSelected(false);
+    form.resetForm();
     reset();
   };
 
-  // Validation
-  const isValid = selectedDate && location && selectedVolunteers.size > 0;
+  const handleSuccessClose = () => {
+    reset();
+    // Optionally reset form after successful submission
+    // form.resetForm();
+  };
 
   if (loading) {
     return <PageLoader />;
@@ -158,224 +61,129 @@ export default function Unos({ volunteers, loading }) {
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Status Alerts */}
       {success && (
-        <Alert variant="success" title="Uspješno!" onClose={reset}>
-          Termin je uspješno zabilježen.
+        <Alert variant="success" title="Uspješno spremljeno!" onClose={handleSuccessClose}>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5" />
+            <span>
+              Termin je uspješno zabilježen za {form.selectedVolunteers.size} volonter{form.selectedVolunteers.size === 1 ? 'a' : 'a'}.
+            </span>
+          </div>
         </Alert>
       )}
       {error && (
-        <Alert variant="error" title="Greška" onClose={reset}>
+        <Alert variant="error" title="Greška pri spremanju" onClose={reset}>
           {error}
         </Alert>
       )}
 
+      {/* Stats Dashboard */}
+      <EntryStatsPanel
+        todayEntries={form.todayEntries}
+        thisWeekEntries={form.thisWeekEntries}
+        sessions={sessions}
+      />
+
       {/* Form Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <Calendar className="w-6 h-6 text-brand-purple" />
-            Podaci o terminu
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <DateInput
-              label="Datum"
-              value={selectedDate}
-              onChange={setSelectedDate}
-              required
-            />
-            <Select
-              label="Lokacija"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              options={locations.map(l => ({ value: l, label: l }))}
-              placeholder="Odaberi lokaciju"
-              required
-            />
-            <NumberInput
-              label="Broj djece"
-              value={childrenCount}
-              onChange={setChildrenCount}
-              min={0}
-            />
-            <NumberInput
-              label="Broj volontera"
-              value={volunteerCount}
-              onChange={setVolunteerCount}
-              min={0}
-            />
-          </div>
-        </CardContent>
-      </Card>
+      <EntryFormCard
+        selectedDate={form.selectedDate}
+        setSelectedDate={form.setSelectedDate}
+        location={form.location}
+        setLocation={form.setLocation}
+        childrenCount={form.childrenCount}
+        setChildrenCount={form.setChildrenCount}
+        volunteerCount={form.volunteerCount}
+        setVolunteerCount={form.setVolunteerCount}
+        locations={form.locations}
+        duplicateEntry={form.duplicateEntry}
+        recentLocationEntries={form.recentLocationEntries}
+      />
 
-      {/* Volunteer Selection Section */}
-      <Card>
-        <CardHeader className="border-b border-surface-100">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <CardTitle className="flex items-center gap-3">
-                <Users className="w-6 h-6 text-brand-purple" />
-                Odabir volontera
-              </CardTitle>
-              <Badge variant={selectedVolunteers.size > 0 ? 'success' : 'default'}>
-                {selectedVolunteers.size} odabrano
-              </Badge>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={selectAll}
-              >
-                Odaberi sve
-              </Button>
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={deselectAll}
-              >
-                Poništi sve
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="p-4">
-          {/* Filters */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-4">
-            <SearchInput
-              value={search}
-              onChange={setSearch}
-              onClear={() => setSearch('')}
-              placeholder="Pretraži volontere..."
-              className="flex-1"
-            />
-            <div className="flex gap-3">
-              <select
-                value={filterLocation}
-                onChange={(e) => setFilterLocation(e.target.value)}
-                className="select input-sm min-w-[140px]"
-              >
-                <option value="">Sve lokacije</option>
-                {locations.map(l => (
-                  <option key={l} value={l}>{l}</option>
-                ))}
-              </select>
-              <button
-                type="button"
-                onClick={() => setShowSelected(!showSelected)}
-                className={`
-                  px-3 py-2 rounded-lg text-sm font-medium transition-all
-                  ${showSelected
-                    ? 'bg-brand-purple text-white'
-                    : 'bg-white border border-surface-200 text-surface-600 hover:bg-surface-50'
-                  }
-                `}
-              >
-                Samo odabrani
-              </button>
-            </div>
-          </div>
-
-          {/* Volunteer List */}
-          <div className="max-h-[450px] overflow-y-auto scrollbar-thin border border-surface-200 rounded-xl">
-            {filteredVolunteers.length === 0 ? (
-              <div className="text-center py-16">
-                <Users className="w-12 h-12 mx-auto text-surface-300 mb-4" />
-                <p className="text-lg text-surface-500">Nema pronađenih volontera</p>
-              </div>
-            ) : (
-              <div className="divide-y divide-surface-100">
-                {filteredVolunteers.map((volunteer, index) => {
-                  const isSelected = selectedVolunteers.has(volunteer.name);
-                  return (
-                    <div
-                      key={`${volunteer.name}-${index}`}
-                      onClick={() => toggleVolunteer(volunteer.name)}
-                      className={`
-                        flex items-center gap-4 p-4 cursor-pointer transition-colors
-                        ${isSelected
-                          ? 'bg-brand-purple/5 hover:bg-brand-purple/10'
-                          : 'hover:bg-surface-50'
-                        }
-                      `}
-                    >
-                      <div className={`
-                        w-7 h-7 rounded-lg border-2 flex items-center justify-center
-                        transition-all flex-shrink-0
-                        ${isSelected
-                          ? 'bg-brand-purple border-brand-purple'
-                          : 'border-surface-300 hover:border-surface-400'
-                        }
-                      `}>
-                        {isSelected && (
-                          <Check className="w-5 h-5 text-white" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className={`font-medium text-lg truncate ${isSelected ? 'text-brand-purple' : 'text-surface-900'}`}>
-                          {volunteer.name}
-                        </p>
-                        <p className="text-sm text-surface-500 truncate">
-                          {volunteer.school} • {volunteer.grade}. razred
-                        </p>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 max-w-[220px]">
-                        {volunteer.locations?.slice(0, 2).map((loc, i) => (
-                          <Badge
-                            key={i}
-                            variant={loc === location ? 'success' : 'default'}
-                          >
-                            {loc}
-                          </Badge>
-                        ))}
-                        {volunteer.locations?.length > 2 && (
-                          <Badge variant="default">
-                            +{volunteer.locations.length - 2}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Volunteer Selection */}
+      <VolunteerSelector
+        filteredVolunteers={form.filteredVolunteers}
+        selectedVolunteers={form.selectedVolunteers}
+        toggleVolunteer={form.toggleVolunteer}
+        selectAll={form.selectAll}
+        deselectAll={form.deselectAll}
+        search={form.search}
+        setSearch={form.setSearch}
+        filterLocation={form.filterLocation}
+        setFilterLocation={form.setFilterLocation}
+        filterSchool={form.filterSchool}
+        setFilterSchool={form.setFilterSchool}
+        showSelected={form.showSelected}
+        setShowSelected={form.setShowSelected}
+        viewMode={form.viewMode}
+        setViewMode={form.setViewMode}
+        locations={form.locations}
+        schools={form.schools}
+        hasFilters={form.hasFilters}
+        clearFilters={form.clearFilters}
+        allVolunteersCount={volunteers?.length || 0}
+        formLocation={form.location}
+      />
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={handleReset}
-          className="sm:order-1"
-        >
-          <RotateCcw className="w-5 h-5" />
-          Resetiraj
-        </Button>
-        <Button
-          type="submit"
-          variant="gold"
-          size="lg"
-          disabled={!isValid || submitting}
-          loading={submitting}
-          className="sm:order-2"
-        >
-          <Send className="w-5 h-5" />
-          Spremi termin
-        </Button>
+      <div className="flex flex-col sm:flex-row gap-4 sm:justify-between">
+        <div className="flex items-center gap-2 order-2 sm:order-1">
+          {/* Keyboard Shortcuts Hint */}
+          <div className="hidden lg:flex items-center gap-2 text-sm text-surface-400">
+            <Keyboard className="w-4 h-4" />
+            <span>Tab za navigaciju</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 order-1 sm:order-2">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleReset}
+          >
+            <RotateCcw className="w-5 h-5" />
+            Resetiraj
+          </Button>
+          <Button
+            type="submit"
+            variant="gold"
+            size="lg"
+            disabled={!form.isValid || submitting}
+            loading={submitting}
+          >
+            <Send className="w-5 h-5" />
+            Spremi termin
+          </Button>
+        </div>
       </div>
 
       {/* Validation Helper */}
-      {!isValid && (
-        <p className="text-sm text-surface-500 text-center">
-          {!selectedDate && 'Odaberite datum. '}
-          {!location && 'Odaberite lokaciju. '}
-          {selectedVolunteers.size === 0 && 'Odaberite barem jednog volontera.'}
-        </p>
+      {!form.isValid && (
+        <div className="text-center">
+          <p className="text-sm text-surface-500 inline-flex items-center gap-2 bg-surface-50 px-4 py-2 rounded-lg">
+            {!form.selectedDate && <span className="text-amber-600">Odaberite datum</span>}
+            {!form.selectedDate && !form.location && <span className="text-surface-300">•</span>}
+            {!form.location && <span className="text-amber-600">Odaberite lokaciju</span>}
+            {(!form.selectedDate || !form.location) && form.selectedVolunteers.size === 0 && <span className="text-surface-300">•</span>}
+            {form.selectedVolunteers.size === 0 && <span className="text-amber-600">Odaberite volontere</span>}
+          </p>
+        </div>
+      )}
+
+      {/* Recent Entries Preview */}
+      {showRecentEntries && sessions.length > 0 && (
+        <RecentEntriesPreview
+          sessions={sessions}
+          onSelectSession={setSelectedSession}
+          limit={5}
+        />
+      )}
+
+      {/* Session Detail Drawer */}
+      {selectedSession && (
+        <SessionDetailDrawer
+          session={selectedSession}
+          allVolunteers={volunteers}
+          onClose={() => setSelectedSession(null)}
+        />
       )}
     </form>
   );
