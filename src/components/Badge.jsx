@@ -1,3 +1,5 @@
+import { getLocationColor } from '../utils/locationColors';
+
 const variants = {
   default: 'bg-surface-100 text-surface-700',
   gold: 'badge-gold',
@@ -16,19 +18,13 @@ export function Badge({ children, variant = 'default', className = '' }) {
   );
 }
 
-export function LocationBadge({ location }) {
-  const colorMap = {
-    'MIOC': 'purple',
-    'KRALJ TOMISLAV': 'gold',
-    'TREŠNJEVKA': 'success',
-    'ŠPANSKO': 'info',
-    'SAMOBOR': 'warning',
-  };
+export function LocationBadge({ location, className = '' }) {
+  const colors = getLocationColor(location);
 
   return (
-    <Badge variant={colorMap[location] || 'default'}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colors.bg} ${colors.text} ${colors.border} ${className}`}>
       {location}
-    </Badge>
+    </span>
   );
 }
 

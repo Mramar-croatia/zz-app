@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { getUniqueYears } from '../utils/croatian';
+import { isCancelledSession, getSessionCounts } from '../utils/session';
 
 /**
  * Custom hook for session filtering
@@ -11,6 +12,7 @@ export default function useSessionFilters(sessions = []) {
   const [search, setSearch] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('active'); // 'all', 'active', 'cancelled'
 
   // Get unique filter options
   const filterOptions = useMemo(() => {
@@ -22,11 +24,20 @@ export default function useSessionFilters(sessions = []) {
     return { locations, years };
   }, [sessions]);
 
+  // Get session counts before other filters
+  const sessionCounts = useMemo(() => {
+    return getSessionCounts(sessions);
+  }, [sessions]);
+
   // Filter sessions
   const filteredSessions = useMemo(() => {
     if (!sessions) return [];
 
     let result = sessions.filter(s => {
+      // Status filter
+      if (statusFilter === 'active' && isCancelledSession(s)) return false;
+      if (statusFilter === 'cancelled' && !isCancelledSession(s)) return false;
+
       // Search filter
       if (search) {
         const searchLower = search.toLowerCase();
@@ -55,18 +66,20 @@ export default function useSessionFilters(sessions = []) {
     });
 
     return result;
-  }, [sessions, search, locationFilter, yearFilter]);
+  }, [sessions, search, locationFilter, yearFilter, statusFilter]);
 
-  // Calculate totals
+  // Calculate totals (only for active sessions in the filtered set)
   const totals = useMemo(() => {
-    return filteredSessions.reduce(
-      (acc, s) => ({
-        children: acc.children + (s.childrenCount || 0),
-        volunteers: acc.volunteers + (s.volunteerCount || 0),
-        sessions: acc.sessions + 1,
-      }),
-      { children: 0, volunteers: 0, sessions: 0 }
-    );
+    const activeSessions = filteredSessions.filter(s => !isCancelledSession(s));
+    const cancelledSessions = filteredSessions.filter(s => isCancelledSession(s));
+
+    return {
+      children: activeSessions.reduce((acc, s) => acc + (s.childrenCount || 0), 0),
+      volunteers: activeSessions.reduce((acc, s) => acc + (s.volunteerCount || 0), 0),
+      sessions: activeSessions.length,
+      cancelled: cancelledSessions.length,
+      total: filteredSessions.length,
+    };
   }, [filteredSessions]);
 
   // Handlers
@@ -74,31 +87,35 @@ export default function useSessionFilters(sessions = []) {
     setSearch('');
     setLocationFilter('');
     setYearFilter('');
+    setStatusFilter('active');
   }, []);
 
-  const hasFilters = search || locationFilter || yearFilter;
+  const hasFilters = search || locationFilter || yearFilter || statusFilter !== 'active';
 
   return {
     // Filter state
     search,
     locationFilter,
     yearFilter,
+    statusFilter,
 
     // Setters
     setSearch,
     setLocationFilter,
     setYearFilter,
+    setStatusFilter,
 
     // Computed values
     filterOptions,
     filteredSessions,
     totals,
+    sessionCounts,
     hasFilters,
 
     // Handlers
     clearFilters,
 
     // For reset deps (used with usePagination)
-    filterDeps: [search, locationFilter, yearFilter],
+    filterDeps: [search, locationFilter, yearFilter, statusFilter],
   };
 }

@@ -70,6 +70,12 @@ export { default as VolunteerDetailDrawer, Avatar } from './VolunteerDetailDrawe
 // Session Detail
 export { default as SessionDetailDrawer } from './SessionDetailDrawer';
 
+// School Detail
+export { default as SchoolDetailDrawer } from './SchoolDetailDrawer';
+
+// Location Detail
+export { default as LocationDetailDrawer } from './LocationDetailDrawer';
+
 // Keyboard Shortcuts
 export { default as KeyboardShortcutsHelp } from './KeyboardShortcutsHelp';
 
@@ -78,3 +84,15 @@ export { default as AttendanceCalendar, AttendanceHeatmap } from './AttendanceCa
 
 // Pagination
 export { default as Pagination } from './Pagination';
+
+// Common Components
+export * from './common';
+
+// Session Components
+export * from './sessions';
+
+// Statistics Components
+export * from './statistics';
+
+// Statistics Chart Components
+export * from './statisticsCharts';

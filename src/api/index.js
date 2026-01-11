@@ -31,21 +31,10 @@ export async function fetchSessions() {
     ...session,
     childrenCount: parseInt(session.childrenCount, 10) || 0,
     volunteerCount: parseInt(session.volunteerCount, 10) || 0,
+    hours: parseFloat(session.hours) || 2, // Default 2 hours per session
     volunteersList: parseVolunteers(session.volunteers),
     parsedDate: parseDate(session.date),
   }));
-}
-
-/**
- * Fetch statistics/analytics from the API
- * @returns {Promise<Object>} Statistics object with summaryCards, tables, and charts
- */
-export async function fetchStatistics() {
-  const response = await fetch(`${API_BASE}/api/statistika`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch statistics: ${response.status}`);
-  }
-  return response.json();
 }
 
 /**

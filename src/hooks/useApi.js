@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { fetchVolunteers, fetchSessions, fetchStatistics, submitAttendance } from '../api';
+import { fetchVolunteers, fetchSessions, submitAttendance } from '../api';
 
 /**
  * Generic hook for async data fetching
@@ -52,13 +52,6 @@ export function useSessions() {
 }
 
 /**
- * Hook for fetching statistics
- */
-export function useStatistics() {
-  return useAsync(fetchStatistics, true);
-}
-
-/**
  * Hook for submitting attendance
  */
 export function useSubmitAttendance() {
@@ -95,28 +88,26 @@ export function useSubmitAttendance() {
 }
 
 /**
- * Hook for combined data (useful for Hero Stats)
+ * Hook for combined data (volunteers and sessions)
+ * Statistics are calculated locally from this data
  */
 export function useDashboardData() {
   const volunteers = useVolunteers();
   const sessions = useSessions();
-  const statistics = useStatistics();
 
-  const loading = volunteers.loading || sessions.loading || statistics.loading;
-  const error = volunteers.error || sessions.error || statistics.error;
+  const loading = volunteers.loading || sessions.loading;
+  const error = volunteers.error || sessions.error;
 
   const refetchAll = useCallback(() => {
     return Promise.all([
       volunteers.refetch(),
       sessions.refetch(),
-      statistics.refetch(),
     ]);
-  }, [volunteers.refetch, sessions.refetch, statistics.refetch]);
+  }, [volunteers.refetch, sessions.refetch]);
 
   return {
     volunteers: volunteers.data,
     sessions: sessions.data,
-    statistics: statistics.data,
     loading,
     error,
     refetchAll,

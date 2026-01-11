@@ -2,39 +2,46 @@ import { useState, useMemo } from 'react';
 import { Layout } from './components';
 import { Baza, Termini, Statistika, Unos } from './modules';
 import { useDashboardData } from './hooks/useApi';
+import { getQuickStats } from './utils/statistics';
 
 function App() {
   const [activeTab, setActiveTab] = useState('baza');
-  const { volunteers, sessions, statistics, loading, error, refetchAll } = useDashboardData();
+  const { volunteers, sessions, loading, error, refetchAll } = useDashboardData();
+
+  // Calculate quick stats from local data
+  const quickStats = useMemo(() => {
+    if (!volunteers || !sessions) return null;
+    return getQuickStats(volunteers, sessions);
+  }, [volunteers, sessions]);
 
   // Dynamic hero stats based on active tab
   const heroStats = useMemo(() => {
-    if (!volunteers || !sessions || !statistics) return null;
+    if (!quickStats) return null;
 
     switch (activeTab) {
       case 'baza':
         return [
-          { label: 'Volontera', value: volunteers.length },
-          { label: 'Aktivnih', value: statistics.summaryCards?.find(c => c.label === 'AKTIVNI VOLONTERI')?.value || '-' },
+          { label: 'Volontera', value: quickStats.totalVolunteers },
+          { label: 'Aktivnih', value: quickStats.activeVolunteers },
         ];
       case 'termini':
         return [
-          { label: 'Termina', value: sessions.length },
-          { label: 'Djece', value: statistics.summaryCards?.find(c => c.label === 'DOLASCI DJECE')?.value || '-' },
+          { label: 'Termina', value: quickStats.totalSessions },
+          { label: 'Djece', value: quickStats.totalChildren },
         ];
       case 'statistika':
         return [
-          { label: 'Sati', value: statistics.summaryCards?.find(c => c.label === 'VOLONTERSKI SATI')?.value || '-' },
-          { label: 'Omjer', value: statistics.summaryCards?.find(c => c.label === 'OMJER')?.value || '-' },
+          { label: 'Sati', value: quickStats.totalHours },
+          { label: 'Omjer', value: quickStats.avgRatio },
         ];
       case 'unos':
         return [
-          { label: 'Volontera', value: volunteers.length },
+          { label: 'Volontera', value: quickStats.totalVolunteers },
         ];
       default:
         return null;
     }
-  }, [activeTab, volunteers, sessions, statistics]);
+  }, [activeTab, quickStats]);
 
   // Render active module
   const renderModule = () => {
@@ -44,7 +51,7 @@ function App() {
       case 'termini':
         return <Termini sessions={sessions} volunteers={volunteers} loading={loading} />;
       case 'statistika':
-        return <Statistika statistics={statistics} loading={loading} onRefresh={refetchAll} />;
+        return <Statistika volunteers={volunteers} sessions={sessions} loading={loading} onRefresh={refetchAll} onNavigate={setActiveTab} />;
       case 'unos':
         return <Unos volunteers={volunteers} loading={loading} />;
       default:
