@@ -73,7 +73,7 @@ export function EmptyState({ icon: Icon, title, description }) {
   return (
     <div className="text-center py-16">
       {Icon && (
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-surface-100 rounded-full mb-5">
+        <div className="inline-flex items-center justify-center w-14 h-14 bg-surface-100 border border-surface-200 mb-4">
           <Icon className="w-8 h-8 text-surface-400" />
         </div>
       )}

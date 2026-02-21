@@ -22,7 +22,7 @@ export default function EntryFormCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-3">
-            <Calendar className="w-6 h-6 text-brand-purple" />
+            <Calendar className="w-6 h-6 text-surface-800" />
             Podaci o terminu
           </CardTitle>
           {location && (
@@ -36,13 +36,13 @@ export default function EntryFormCard({
       <CardContent>
         {/* Duplicate Warning */}
         {duplicateEntry && (
-          <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <div className="mb-4 p-3 bg-amber-50 border border-amber-200 flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-amber-800">
                 Termin za ovaj datum i lokaciju već postoji
               </p>
-              <p className="text-xs text-amber-600 mt-1">
+              <p className="text-xs text-amber-800 mt-1">
                 Evidentirano: {duplicateEntry.volunteerCount || duplicateEntry.volunteers?.length || 0} volontera, {duplicateEntry.childrenCount || 0} djece
               </p>
             </div>
@@ -91,7 +91,7 @@ export default function EntryFormCard({
               {recentLocationEntries.slice(0, 5).map((entry, i) => (
                 <div
                   key={i}
-                  className="px-3 py-1.5 bg-surface-50 rounded-lg text-xs text-surface-600 flex items-center gap-2"
+                  className="px-3 py-1.5 bg-surface-50 text-xs text-surface-600 flex items-center gap-2"
                 >
                   <span className="font-medium">{formatDateShort(entry.date)}</span>
                   <span className="text-surface-400">|</span>

@@ -19,9 +19,9 @@ export default function ProgressBar({
           )}
         </div>
       )}
-      <div className={`w-full ${heightClass} bg-surface-100 rounded-full overflow-hidden`}>
+      <div className={`w-full ${heightClass} bg-surface-200 overflow-hidden`}>
         <div
-          className={`${heightClass} ${colorClass} rounded-full transition-all duration-500`}
+          className={`${heightClass} ${colorClass} transition-all duration-300`}
           style={{ width: `${percentage}%` }}
         />
       </div>

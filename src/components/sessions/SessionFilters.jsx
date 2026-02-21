@@ -40,7 +40,7 @@ export default function SessionFilters({
                 />
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                  className="text-sm text-surface-700 hover:text-surface-900 underline font-medium"
                 >
                   Ukloni filtere
                 </button>
@@ -50,38 +50,38 @@ export default function SessionFilters({
         </div>
 
         {/* Status Filter Tabs */}
-        <div className="flex items-center gap-1 mb-4 bg-surface-100 rounded-lg p-1">
+        <div className="flex items-center gap-1 mb-4 bg-surface-100 border border-surface-200 p-1">
           <button
             onClick={() => setStatusFilter('active')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-colors ${
               statusFilter === 'active'
-                ? 'bg-white shadow-sm text-brand-purple'
+                ? 'bg-white shadow-sm text-surface-900'
                 : 'text-surface-600 hover:text-surface-900'
             }`}
           >
             <CalendarCheck className="w-4 h-4" />
             <span>Aktivni</span>
-            <span className="text-xs bg-brand-purple/10 text-brand-purple px-1.5 py-0.5 rounded-full">
+            <span className="text-xs bg-surface-200 text-surface-700 px-1.5 py-0.5">
               {sessionCounts.active}
             </span>
           </button>
           <button
             onClick={() => setStatusFilter('cancelled')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-colors ${
               statusFilter === 'cancelled'
-                ? 'bg-white shadow-sm text-red-600'
+                ? 'bg-white shadow-sm text-[#991B1B]'
                 : 'text-surface-600 hover:text-surface-900'
             }`}
           >
             <CalendarX className="w-4 h-4" />
             <span>Otkazani</span>
-            <span className="text-xs bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">
+            <span className="text-xs bg-[#FFF1F2] text-[#991B1B] px-1.5 py-0.5">
               {sessionCounts.cancelled}
             </span>
           </button>
           <button
             onClick={() => setStatusFilter('all')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-colors ${
               statusFilter === 'all'
                 ? 'bg-white shadow-sm text-surface-900'
                 : 'text-surface-600 hover:text-surface-900'
@@ -89,7 +89,7 @@ export default function SessionFilters({
           >
             <CalendarDays className="w-4 h-4" />
             <span>Svi</span>
-            <span className="text-xs bg-surface-200 text-surface-600 px-1.5 py-0.5 rounded-full">
+            <span className="text-xs bg-surface-200 text-surface-600 px-1.5 py-0.5">
               {sessionCounts.total}
             </span>
           </button>
@@ -134,7 +134,7 @@ export default function SessionFilters({
               />
               <button
                 onClick={clearFilters}
-                className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                className="text-sm text-surface-700 hover:text-surface-900 underline font-medium"
               >
                 Ukloni filtere
               </button>

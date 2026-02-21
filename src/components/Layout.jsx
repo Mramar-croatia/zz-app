@@ -22,11 +22,11 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-surface-50">
+    <div className="min-h-screen bg-surface-100">
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -34,36 +34,36 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
       {/* Sidebar */}
       <aside className={`
         fixed top-0 left-0 h-full bg-white border-r border-surface-200 z-50
-        transition-all duration-300 ease-in-out
+        transition-all duration-200 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
-        ${sidebarCollapsed ? 'lg:w-20' : 'lg:w-72'}
+        ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'}
       `}>
         <div className="flex flex-col h-full">
           {/* Logo Section */}
           <div className={`
-            flex items-center gap-4 p-5 border-b border-surface-100
-            ${sidebarCollapsed ? 'lg:justify-center' : ''}
+            flex items-center gap-3 px-4 py-5 border-b border-surface-200
+            ${sidebarCollapsed ? 'lg:justify-center lg:px-3' : ''}
           `}>
-            <Logo size={sidebarCollapsed ? 44 : 48} />
+            <Logo size={sidebarCollapsed ? 32 : 36} />
             {!sidebarCollapsed && (
               <div className="flex-1 min-w-0">
-                <h1 className="font-display font-bold text-xl text-brand-purple truncate">
+                <h1 className="font-bold text-sm text-surface-900 truncate tracking-widest uppercase">
                   Zlatni Zmaj
                 </h1>
-                <p className="text-sm text-surface-500 truncate">Volonteri</p>
+                <p className="text-xs text-surface-400 truncate uppercase tracking-widest mt-0.5">Volonteri</p>
               </div>
             )}
             <button
               onClick={() => setSidebarOpen(false)}
-              className="p-2 -mr-2 lg:hidden hover:bg-surface-100 rounded-lg"
+              className="p-1.5 lg:hidden hover:bg-surface-100 text-surface-400 hover:text-surface-700 transition-colors"
             >
-              <X className="w-6 h-6 text-surface-500" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+          <nav className="flex-1 py-3 overflow-y-auto">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -81,7 +81,7 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
                   `}
                   title={sidebarCollapsed ? item.label : undefined}
                 >
-                  <Icon className={`w-6 h-6 flex-shrink-0 ${isActive ? '' : 'text-surface-400'}`} />
+                  <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-surface-900' : 'text-surface-400'}`} />
                   {!sidebarCollapsed && (
                     <span className="truncate">{item.label}</span>
                   )}
@@ -90,18 +90,14 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
             })}
           </nav>
 
-          {/* Collapse Toggle - Desktop Only */}
-          <div className="hidden lg:block p-3 border-t border-surface-100">
+          {/* Collapse Toggle — Desktop Only */}
+          <div className="hidden lg:block border-t border-surface-200">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className={`
-                w-full flex items-center justify-center gap-2 px-3 py-2
-                rounded-lg text-surface-500 hover:bg-surface-100
-                hover:text-surface-700 transition-colors
-              `}
+              className="w-full flex items-center justify-center gap-2 px-3 py-3 text-surface-400 hover:bg-surface-100 hover:text-surface-700 transition-colors text-xs uppercase tracking-widest font-medium"
             >
-              <ChevronLeft className={`w-5 h-5 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`} />
-              {!sidebarCollapsed && <span className="text-sm">Smanji</span>}
+              <ChevronLeft className={`w-4 h-4 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`} />
+              {!sidebarCollapsed && <span>Smanji</span>}
             </button>
           </div>
         </div>
@@ -109,35 +105,35 @@ export default function Layout({ children, activeTab, onTabChange, heroStats }) 
 
       {/* Main Content */}
       <div className={`
-        transition-all duration-300
-        ${sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'}
+        transition-all duration-200
+        ${sidebarCollapsed ? 'lg:pl-16' : 'lg:pl-64'}
       `}>
         {/* Top Header */}
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-lg border-b border-surface-100">
-          <div className="flex items-center gap-4 px-4 py-4 lg:px-8">
+        <header className="sticky top-0 z-30 bg-white border-b border-surface-200">
+          <div className="flex items-center gap-4 px-4 py-3 lg:px-8">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 -ml-2 lg:hidden hover:bg-surface-100 rounded-lg"
+              className="p-1.5 -ml-1.5 lg:hidden hover:bg-surface-100 text-surface-600 transition-colors"
             >
-              <Menu className="w-6 h-6 text-surface-700" />
+              <Menu className="w-5 h-5" />
             </button>
 
             <div className="flex-1 min-w-0">
-              <h2 className="font-display font-semibold text-xl lg:text-2xl text-surface-900">
+              <h2 className="font-bold text-sm lg:text-base text-surface-900 tracking-widest uppercase">
                 {NAV_ITEMS.find(i => i.id === activeTab)?.label}
               </h2>
-              <p className="text-sm lg:text-base text-surface-500 hidden sm:block">
+              <p className="text-xs text-surface-400 hidden sm:block uppercase tracking-widest">
                 {NAV_ITEMS.find(i => i.id === activeTab)?.description}
               </p>
             </div>
 
             {/* Hero Stats Bar */}
             {heroStats && (
-              <div className="hidden md:flex items-center gap-6 lg:gap-8">
+              <div className="hidden md:flex items-center divide-x divide-surface-200">
                 {heroStats.map((stat, index) => (
-                  <div key={index} className="text-right">
-                    <p className="text-sm lg:text-base text-surface-500">{stat.label}</p>
-                    <p className="font-display font-bold text-brand-purple text-lg lg:text-xl">{stat.value}</p>
+                  <div key={index} className="text-right px-5 first:pl-0">
+                    <p className="text-xs text-surface-400 uppercase tracking-widest">{stat.label}</p>
+                    <p className="font-bold text-surface-900 text-lg tabular-nums">{stat.value}</p>
                   </div>
                 ))}
               </div>

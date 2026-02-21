@@ -10,17 +10,17 @@ export default function HoursProgress({ hours, goal = HOURS_GOALS.basic, compact
   if (compact) {
     return (
       <div className="flex items-center gap-3">
-        <div className="w-20 h-2 bg-surface-100 rounded-full overflow-hidden">
+        <div className="w-20 h-1.5 bg-surface-200 overflow-hidden">
           <div
-            className={`h-full rounded-full transition-all ${
-              progress >= 100 ? 'bg-emerald-500' : 'bg-brand-purple'
+            className={`h-full transition-all ${
+              progress >= 100 ? 'bg-emerald-700' : 'bg-brand-purple'
             }`}
             style={{ width: `${progress}%` }}
           />
         </div>
         <span
           className={`font-semibold text-lg ${
-            progress >= 100 ? 'text-emerald-600' : 'text-brand-purple'
+            progress >= 100 ? 'text-emerald-800' : 'text-brand-purple'
           }`}
         >
           {hours}
@@ -37,10 +37,10 @@ export default function HoursProgress({ hours, goal = HOURS_GOALS.basic, compact
         </span>
         {progress >= 100 && <Check className="w-4 h-4 text-emerald-500" />}
       </div>
-      <div className="h-2 bg-surface-100 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-surface-200 overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all ${
-            progress >= 100 ? 'bg-emerald-500' : 'bg-brand-purple'
+          className={`h-full transition-all ${
+            progress >= 100 ? 'bg-emerald-700' : 'bg-brand-purple'
           }`}
           style={{ width: `${progress}%` }}
         />

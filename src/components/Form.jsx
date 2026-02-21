@@ -68,7 +68,7 @@ export const SearchInput = forwardRef(function SearchInput(
       {value && (
         <button
           onClick={onClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-surface-100"
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-surface-100"
         >
           <X className="w-4 h-4 text-surface-400" />
         </button>
@@ -129,9 +129,9 @@ export function Checkbox({ checked, onChange, label, className = '' }) {
           className="sr-only"
         />
         <div className={`
-          w-5 h-5 rounded border-2 transition-all duration-200
+          w-5 h-5 border-2 transition-all duration-200
           ${checked
-            ? 'bg-brand-purple border-brand-purple'
+            ? 'bg-surface-900 border-surface-900'
             : 'bg-white border-surface-300 hover:border-surface-400'
           }
         `}>

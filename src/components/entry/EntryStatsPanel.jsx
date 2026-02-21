@@ -28,10 +28,10 @@ export default function EntryStatsPanel({
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {/* Today's Entries */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-purple/10 mb-3">
-              <CalendarPlus className="w-6 h-6 text-brand-purple" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-surface-100 border border-surface-200 mb-3">
+              <CalendarPlus className="w-6 h-6 text-surface-700" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-brand-purple">
+            <p className="text-3xl lg:text-4xl font-bold text-surface-900">
               {todayCount}
             </p>
             <p className="text-sm text-surface-500 mt-1">Danas uneseno</p>
@@ -44,10 +44,10 @@ export default function EntryStatsPanel({
 
           {/* This Week */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-gold/10 mb-3">
-              <CalendarCheck className="w-6 h-6 text-brand-gold" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-surface-100 border border-surface-200 mb-3">
+              <CalendarCheck className="w-6 h-6 text-surface-700" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-brand-gold">
+            <p className="text-3xl lg:text-4xl font-bold text-surface-700">
               {weekCount}
             </p>
             <p className="text-sm text-surface-500 mt-1">Ovaj tjedan</p>
@@ -60,10 +60,10 @@ export default function EntryStatsPanel({
 
           {/* Week's Children */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 mb-3">
-              <Baby className="w-6 h-6 text-emerald-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-surface-100 border border-surface-200 mb-3">
+              <Baby className="w-6 h-6 text-emerald-800" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-emerald-600">
+            <p className="text-3xl lg:text-4xl font-bold text-emerald-800">
               {weekChildren}
             </p>
             <p className="text-sm text-surface-500 mt-1">Djece ovaj tjedan</p>
@@ -76,12 +76,12 @@ export default function EntryStatsPanel({
 
           {/* Last Entry */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 mb-3">
-              <Clock className="w-6 h-6 text-indigo-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-surface-100 border border-surface-200 mb-3">
+              <Clock className="w-6 h-6 text-surface-700" />
             </div>
             {lastEntry ? (
               <>
-                <p className="text-lg lg:text-xl font-bold text-indigo-600">
+                <p className="text-lg lg:text-xl font-bold text-surface-900">
                   {formatDateShort(lastEntry.date)}
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Zadnji unos</p>
@@ -91,7 +91,7 @@ export default function EntryStatsPanel({
               </>
             ) : (
               <>
-                <p className="text-lg lg:text-xl font-bold text-indigo-600">
+                <p className="text-lg lg:text-xl font-bold text-surface-900">
                   -
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Zadnji unos</p>

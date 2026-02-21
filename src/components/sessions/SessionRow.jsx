@@ -9,7 +9,7 @@ export default function SessionRow({ session, onClick }) {
 
   return (
     <TableRow
-      className={`cursor-pointer ${isCancelled ? 'bg-red-50/50' : ''}`}
+      className={`cursor-pointer ${isCancelled ? 'bg-[#FFF1F2]/50' : ''}`}
       onClick={onClick}
     >
       <TableCell>
@@ -24,7 +24,7 @@ export default function SessionRow({ session, onClick }) {
               {session.date}
             </span>
             {isCancelled && (
-              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 text-xs font-medium bg-[#FFF1F2] text-[#7F1D1D]">
                 Otkazano
               </span>
             )}
@@ -35,12 +35,12 @@ export default function SessionRow({ session, onClick }) {
         <LocationBadge location={session.location} />
       </TableCell>
       <TableCell className="text-center">
-        <span className={`font-semibold text-lg ${isCancelled ? 'text-surface-400' : 'text-brand-gold'}`}>
+        <span className={`font-semibold text-lg ${isCancelled ? 'text-surface-400' : 'text-surface-700'}`}>
           {session.childrenCount || '-'}
         </span>
       </TableCell>
       <TableCell className="text-center">
-        <span className={`font-semibold text-lg ${isCancelled ? 'text-surface-400' : 'text-brand-purple'}`}>
+        <span className={`font-semibold text-lg ${isCancelled ? 'text-surface-400' : 'text-surface-900'}`}>
           {session.volunteerCount || '-'}
         </span>
       </TableCell>

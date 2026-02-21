@@ -11,14 +11,14 @@ export default function Avatar({ name, size = 'md', className = '' }) {
       .slice(0, 2) || '?';
 
   const colors = [
-    'bg-brand-purple',
-    'bg-brand-gold',
-    'bg-emerald-500',
-    'bg-blue-500',
-    'bg-rose-500',
-    'bg-amber-500',
-    'bg-cyan-500',
-    'bg-violet-500',
+    'bg-surface-700',
+    'bg-surface-800',
+    'bg-surface-600',
+    'bg-surface-900',
+    'bg-surface-700',
+    'bg-surface-800',
+    'bg-surface-600',
+    'bg-surface-900',
   ];
   const colorIndex =
     (name?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) %
@@ -34,7 +34,7 @@ export default function Avatar({ name, size = 'md', className = '' }) {
 
   return (
     <div
-      className={`${sizes[size]} ${colors[colorIndex]} rounded-full flex items-center justify-center text-white font-semibold ${className}`}
+      className={`${sizes[size]} ${colors[colorIndex]} flex items-center justify-center text-white font-semibold ${className}`}
     >
       {initials}
     </div>

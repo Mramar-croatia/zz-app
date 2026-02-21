@@ -61,7 +61,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2.5 hover:bg-surface-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-2.5 hover:bg-surface-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -71,9 +71,9 @@ export default function Pagination({
             <button
               key={pageNum}
               onClick={() => onPageChange(pageNum)}
-              className={`w-11 h-11 rounded-lg text-base font-medium transition-colors ${
+              className={`w-10 h-10 text-base font-medium transition-colors tabular-nums ${
                 currentPage === pageNum
-                  ? 'bg-brand-purple text-white'
+                  ? 'bg-surface-900 text-white'
                   : 'hover:bg-surface-100 text-surface-600'
               }`}
             >
@@ -85,7 +85,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2.5 hover:bg-surface-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-2.5 hover:bg-surface-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronRight className="w-6 h-6" />
         </button>

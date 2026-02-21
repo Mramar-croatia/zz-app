@@ -8,14 +8,15 @@ export default {
     extend: {
       colors: {
         brand: {
-          gold: '#D4AF37',
-          'gold-light': '#F4D03F',
-          'gold-dark': '#B8860B',
-          purple: '#4C1D95',
-          'purple-dark': '#2E1065',
-          'purple-light': '#6D28D9',
-          indigo: '#3730A3',
-          'indigo-light': '#4F46E5',
+          // Near-black primary; gold remapped to dark gray secondary
+          gold: '#525252',
+          'gold-light': '#737373',
+          'gold-dark': '#3F3F46',
+          purple: '#111111',
+          'purple-dark': '#000000',
+          'purple-light': '#27272A',
+          indigo: '#1C1C1E',
+          'indigo-light': '#2C2C2E',
         },
         surface: {
           50: '#FAFAFA',
@@ -32,17 +33,15 @@ export default {
       },
       fontFamily: {
         sans: ['Manrope', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        display: ['Manrope', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.04)',
-        'glow': '0 0 20px rgba(212, 175, 55, 0.3)',
-        'glow-purple': '0 0 20px rgba(76, 29, 149, 0.3)',
+        'soft': '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+        'soft-lg': '0 4px 12px -2px rgba(0, 0, 0, 0.10), 0 2px 6px -2px rgba(0, 0, 0, 0.05)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.3s ease-out',
-        'slide-up': 'slideUp 0.3s ease-out',
+        'fade-in': 'fadeIn 0.2s ease-out',
+        'slide-up': 'slideUp 0.2s ease-out',
         'pulse-soft': 'pulseSoft 2s infinite',
       },
       keyframes: {
@@ -51,12 +50,12 @@ export default {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         pulseSoft: {
           '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.7' },
+          '50%': { opacity: '0.6' },
         },
       },
     },

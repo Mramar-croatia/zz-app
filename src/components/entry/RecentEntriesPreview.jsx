@@ -21,7 +21,7 @@ export default function RecentEntriesPreview({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-3">
-          <History className="w-6 h-6 text-brand-purple" />
+          <History className="w-6 h-6 text-surface-800" />
           Nedavni unosi
         </CardTitle>
       </CardHeader>
@@ -88,7 +88,7 @@ export default function RecentEntriesPreview({
                       {session.volunteers.slice(0, 3).map((name, i) => (
                         <span
                           key={i}
-                          className="text-xs bg-surface-100 text-surface-600 px-2 py-0.5 rounded-full truncate max-w-[80px]"
+                          className="text-xs bg-surface-100 text-surface-600 px-2 py-0.5 truncate max-w-[80px]"
                         >
                           {name.split(' ')[0]}
                         </span>
