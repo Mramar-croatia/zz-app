@@ -43,7 +43,7 @@ export function ActiveFilters({ filters, onRemove, onClear }) {
         <button
           key={key}
           onClick={() => onRemove(key)}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-brand-purple/10 text-brand-purple rounded-full text-xs font-medium hover:bg-brand-purple/20 transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-100 text-surface-700 border border-surface-200 text-xs font-medium hover:bg-surface-200 transition-colors"
         >
           <span>{value}</span>
           <X className="w-3 h-3" />
@@ -87,10 +87,10 @@ export function FilterChips({ options, selected, onChange, multiple = false }) {
             key={value}
             onClick={() => handleClick(value)}
             className={`
-              px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
+              px-3 py-1.5 text-sm font-medium transition-all duration-200
               ${isSelected
-                ? 'bg-brand-purple text-white shadow-soft'
-                : 'bg-white text-surface-600 border border-surface-200 hover:border-surface-300 hover:bg-surface-50'
+                ? 'bg-surface-900 text-white'
+                : 'bg-white text-surface-600 border border-surface-200 hover:border-surface-400 hover:bg-surface-50'
               }
             `}
           >

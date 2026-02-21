@@ -48,7 +48,7 @@ export default function VolunteerSelector({
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-4">
               <CardTitle className="flex items-center gap-3">
-                <Users className="w-6 h-6 text-brand-purple" />
+                <Users className="w-6 h-6 text-surface-800" />
                 Odabir volontera
               </CardTitle>
               <Badge variant={selectedCount > 0 ? 'success' : 'default'}>
@@ -59,14 +59,14 @@ export default function VolunteerSelector({
               <button
                 type="button"
                 onClick={selectAll}
-                className="px-3 py-1.5 text-sm font-medium text-brand-purple hover:bg-brand-purple/5 rounded-lg transition-colors"
+                className="px-3 py-1.5 text-sm font-medium text-surface-800 hover:bg-surface-100 transition-colors"
               >
                 Odaberi sve
               </button>
               <button
                 type="button"
                 onClick={deselectAll}
-                className="px-3 py-1.5 text-sm font-medium text-surface-600 hover:bg-surface-100 rounded-lg transition-colors"
+                className="px-3 py-1.5 text-sm font-medium text-surface-600 hover:bg-surface-100 transition-colors"
               >
                 Poništi
               </button>
@@ -77,13 +77,13 @@ export default function VolunteerSelector({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               {/* View Mode Toggle */}
-              <div className="hidden sm:flex items-center gap-1 bg-surface-100 rounded-lg p-1">
+              <div className="hidden sm:flex items-center gap-1 bg-surface-100 p-1">
                 <button
                   type="button"
                   onClick={() => setViewMode('list')}
-                  className={`p-1.5 rounded-md transition-colors ${
+                  className={`p-1.5 transition-colors ${
                     viewMode === 'list'
-                      ? 'bg-white shadow-sm text-brand-purple'
+                      ? 'bg-white shadow-sm text-surface-900'
                       : 'text-surface-500 hover:text-surface-700'
                   }`}
                   title="Popis"
@@ -93,9 +93,9 @@ export default function VolunteerSelector({
                 <button
                   type="button"
                   onClick={() => setViewMode('cards')}
-                  className={`p-1.5 rounded-md transition-colors ${
+                  className={`p-1.5 transition-colors ${
                     viewMode === 'cards'
-                      ? 'bg-white shadow-sm text-brand-purple'
+                      ? 'bg-white shadow-sm text-surface-900'
                       : 'text-surface-500 hover:text-surface-700'
                   }`}
                   title="Kartice"
@@ -109,9 +109,9 @@ export default function VolunteerSelector({
                 type="button"
                 onClick={() => setShowSelected(!showSelected)}
                 className={`
-                  flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                  flex items-center gap-2 px-3 py-1.5 text-sm font-medium transition-all
                   ${showSelected
-                    ? 'bg-brand-purple text-white'
+                    ? 'bg-surface-900 text-white'
                     : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
                   }
                 `}
@@ -135,7 +135,7 @@ export default function VolunteerSelector({
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                  className="text-sm text-surface-800 hover:text-surface-900 font-medium"
                 >
                   Ukloni
                 </button>
@@ -180,7 +180,7 @@ export default function VolunteerSelector({
         </div>
 
         {/* Volunteer List/Cards */}
-        <div className="max-h-[450px] overflow-y-auto scrollbar-thin border border-surface-200 rounded-xl">
+        <div className="max-h-[450px] overflow-y-auto scrollbar-thin border border-surface-200">
           {filteredVolunteers.length === 0 ? (
             <div className="text-center py-16">
               <Users className="w-12 h-12 mx-auto text-surface-300 mb-4" />
@@ -189,7 +189,7 @@ export default function VolunteerSelector({
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="mt-3 text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                  className="mt-3 text-sm text-surface-800 hover:text-surface-900 font-medium"
                 >
                   Ukloni filtere
                 </button>
@@ -207,16 +207,16 @@ export default function VolunteerSelector({
                     className={`
                       flex items-center gap-4 p-4 cursor-pointer transition-colors
                       ${isSelected
-                        ? 'bg-brand-purple/5 hover:bg-brand-purple/10'
+                        ? 'bg-surface-100 hover:bg-surface-200'
                         : 'hover:bg-surface-50'
                       }
                     `}
                   >
                     <div className={`
-                      w-7 h-7 rounded-lg border-2 flex items-center justify-center
+                      w-7 h-7 border-2 flex items-center justify-center
                       transition-all flex-shrink-0
                       ${isSelected
-                        ? 'bg-brand-purple border-brand-purple'
+                        ? 'bg-surface-900 border-surface-900'
                         : 'border-surface-300 hover:border-surface-400'
                       }
                     `}>
@@ -226,7 +226,7 @@ export default function VolunteerSelector({
                     </div>
                     <Avatar name={volunteer.name} size="sm" />
                     <div className="flex-1 min-w-0">
-                      <p className={`font-medium text-base truncate ${isSelected ? 'text-brand-purple' : 'text-surface-900'}`}>
+                      <p className={`font-medium text-base truncate ${isSelected ? 'text-surface-900' : 'text-surface-900'}`}>
                         {volunteer.name}
                       </p>
                       <div className="flex items-center gap-2 text-sm text-surface-500">
@@ -254,7 +254,7 @@ export default function VolunteerSelector({
                         </Badge>
                       )}
                     </div>
-                    <ChevronRight className={`w-5 h-5 transition-colors ${isSelected ? 'text-brand-purple' : 'text-surface-300'}`} />
+                    <ChevronRight className={`w-5 h-5 transition-colors ${isSelected ? 'text-surface-700' : 'text-surface-300'}`} />
                   </div>
                 );
               })}
@@ -269,18 +269,18 @@ export default function VolunteerSelector({
                     key={`${volunteer.name}-${index}`}
                     onClick={() => toggleVolunteer(volunteer.name)}
                     className={`
-                      relative p-4 rounded-xl border-2 cursor-pointer transition-all
+                      relative p-4 border-2 cursor-pointer transition-all
                       ${isSelected
-                        ? 'border-brand-purple bg-brand-purple/5'
+                        ? 'border-surface-900 bg-surface-100'
                         : 'border-surface-200 hover:border-surface-300 hover:bg-surface-50'
                       }
                     `}
                   >
                     {/* Selection Indicator */}
                     <div className={`
-                      absolute top-3 right-3 w-6 h-6 rounded-full flex items-center justify-center
+                      absolute top-3 right-3 w-6 h-6 flex items-center justify-center
                       ${isSelected
-                        ? 'bg-brand-purple'
+                        ? 'bg-surface-900'
                         : 'border-2 border-surface-300'
                       }
                     `}>
@@ -290,7 +290,7 @@ export default function VolunteerSelector({
                     <div className="flex items-start gap-3">
                       <Avatar name={volunteer.name} size="md" />
                       <div className="flex-1 min-w-0 pr-6">
-                        <p className={`font-semibold truncate ${isSelected ? 'text-brand-purple' : 'text-surface-900'}`}>
+                        <p className={`font-semibold truncate ${isSelected ? 'text-surface-900' : 'text-surface-900'}`}>
                           {volunteer.name}
                         </p>
                         <p className="text-sm text-surface-500 truncate mt-0.5">
@@ -313,9 +313,9 @@ export default function VolunteerSelector({
                         <span
                           key={i}
                           className={`
-                            text-xs px-2 py-0.5 rounded-full
+                            text-xs px-2 py-0.5
                             ${loc === formLocation
-                              ? 'bg-emerald-100 text-emerald-700'
+                              ? 'bg-emerald-800 text-white'
                               : 'bg-surface-100 text-surface-600'
                             }
                           `}
@@ -345,7 +345,7 @@ export default function VolunteerSelector({
                   <Avatar key={i} name={name} size="xs" className="ring-2 ring-white" />
                 ))}
                 {selectedCount > 5 && (
-                  <div className="w-6 h-6 rounded-full bg-surface-200 flex items-center justify-center text-xs font-medium text-surface-600 ring-2 ring-white">
+                  <div className="w-6 h-6 bg-surface-200 flex items-center justify-center text-xs font-medium text-surface-600 ring-2 ring-white">
                     +{selectedCount - 5}
                   </div>
                 )}
@@ -357,7 +357,7 @@ export default function VolunteerSelector({
             <button
               type="button"
               onClick={() => setShowSelected(true)}
-              className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+              className="text-sm text-surface-800 hover:text-surface-900 font-medium"
             >
               Prikaži odabrane
             </button>

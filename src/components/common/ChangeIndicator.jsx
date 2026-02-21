@@ -6,15 +6,15 @@ export default function ChangeIndicator({ value, suffix = '%', showIcon = true, 
   const isNeutral = value === 0;
 
   const colorClass = isPositive
-    ? 'text-emerald-600'
+    ? 'text-emerald-800'
     : isNegative
-      ? 'text-red-600'
+      ? 'text-red-800'
       : 'text-surface-500';
 
   const bgClass = isPositive
-    ? 'bg-emerald-100'
+    ? 'bg-emerald-50'
     : isNegative
-      ? 'bg-red-100'
+      ? 'bg-red-50'
       : 'bg-surface-100';
 
   const sizeClass = size === 'sm'
@@ -28,7 +28,7 @@ export default function ChangeIndicator({ value, suffix = '%', showIcon = true, 
   const Icon = isPositive ? ArrowUpRight : isNegative ? ArrowDownRight : Minus;
 
   return (
-    <span className={`inline-flex items-center gap-0.5 rounded-full font-medium ${colorClass} ${bgClass} ${sizeClass}`}>
+    <span className={`inline-flex items-center gap-0.5 font-medium ${colorClass} ${bgClass} ${sizeClass}`}>
       {showIcon && <Icon className={iconSize} />}
       <span>{isPositive ? '+' : ''}{value}{suffix}</span>
     </span>

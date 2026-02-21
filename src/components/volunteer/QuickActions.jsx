@@ -35,7 +35,7 @@ export default function QuickActions({ volunteer, onViewProfile, compact = false
       <div className="flex items-center gap-1.5">
         <button
           onClick={handleViewProfile}
-          className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+          className="p-2 hover:bg-surface-100 transition-colors"
           title="Pogledaj profil"
         >
           <Eye className="w-5 h-5 text-surface-400 hover:text-brand-purple" />
@@ -48,14 +48,14 @@ export default function QuickActions({ volunteer, onViewProfile, compact = false
     <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
       <button
         onClick={handleViewProfile}
-        className="p-2 hover:bg-brand-purple/10 rounded-lg transition-colors"
+        className="p-2 hover:bg-surface-100 transition-colors"
         title="Pogledaj profil"
       >
         <Eye className="w-5 h-5 text-surface-400 hover:text-brand-purple" />
       </button>
       <button
         onClick={copyRowData}
-        className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+        className="p-2 hover:bg-surface-100 transition-colors"
         title="Kopiraj podatke"
       >
         {copiedRow ? (
@@ -66,7 +66,7 @@ export default function QuickActions({ volunteer, onViewProfile, compact = false
       </button>
       <button
         onClick={copyPhone}
-        className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+        className="p-2 hover:bg-surface-100 transition-colors"
         title="Kopiraj broj"
       >
         {copied ? (
@@ -78,7 +78,7 @@ export default function QuickActions({ volunteer, onViewProfile, compact = false
       <a
         href={`tel:${volunteer.phone}`}
         onClick={e => e.stopPropagation()}
-        className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+        className="p-2 hover:bg-surface-100 transition-colors"
         title="Nazovi"
       >
         <Phone className="w-5 h-5 text-surface-400 hover:text-emerald-600" />

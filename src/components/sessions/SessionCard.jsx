@@ -19,14 +19,14 @@ export default function SessionCard({
       <Card
         hover
         onClick={onToggleExpand}
-        className={isCancelled ? 'border-red-200 bg-red-50/30' : ''}
+        className={isCancelled ? 'border-[#FECDD3] bg-[#FFF1F2]' : ''}
       >
         <CardContent className="p-4">
           <div className="flex items-start justify-between">
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 {isCancelled ? (
-                  <CalendarX className="w-4 h-4 text-red-400" />
+                  <CalendarX className="w-4 h-4 text-[#991B1B]" />
                 ) : (
                   <Calendar className="w-4 h-4 text-surface-400" />
                 )}
@@ -34,7 +34,7 @@ export default function SessionCard({
                   {session.date}
                 </span>
                 {isCancelled && (
-                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                  <span className="inline-flex items-center px-1.5 py-0.5 text-xs font-medium bg-[#FFF1F2] text-[#7F1D1D]">
                     Otkazano
                   </span>
                 )}
@@ -51,13 +51,13 @@ export default function SessionCard({
               ) : (
                 <>
                   <div className="text-center">
-                    <p className="text-lg font-bold text-brand-gold">
+                    <p className="text-lg font-bold text-surface-700">
                       {session.childrenCount || '-'}
                     </p>
                     <p className="text-xs text-surface-500">djece</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-lg font-bold text-brand-purple">
+                    <p className="text-lg font-bold text-surface-900">
                       {session.volunteerCount || '-'}
                     </p>
                     <p className="text-xs text-surface-500">vol.</p>
@@ -95,18 +95,18 @@ export default function SessionCard({
     <Card
       hover
       onClick={onClick}
-      className={`cursor-pointer ${isCancelled ? 'border-red-200 bg-red-50/30' : ''}`}
+      className={`cursor-pointer ${isCancelled ? 'border-[#FECDD3] bg-[#FFF1F2]' : ''}`}
     >
       <CardContent className="p-5">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-              isCancelled ? 'bg-red-100' : 'bg-brand-purple/10'
+            <div className={`w-10 h-10 flex items-center justify-center border border-surface-200 ${
+              isCancelled ? 'bg-[#FFF1F2] border-[#FECDD3]' : 'bg-surface-100'
             }`}>
               {isCancelled ? (
-                <CalendarX className="w-5 h-5 text-red-500" />
+                <CalendarX className="w-5 h-5 text-[#991B1B]" />
               ) : (
-                <Calendar className="w-5 h-5 text-brand-purple" />
+                <Calendar className="w-5 h-5 text-surface-600" />
               )}
             </div>
             <div>
@@ -117,7 +117,7 @@ export default function SessionCard({
             </div>
           </div>
           {isCancelled && (
-            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+            <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-[#FFF1F2] text-[#7F1D1D]">
               Otkazano
             </span>
           )}
@@ -125,22 +125,22 @@ export default function SessionCard({
 
         {isCancelled ? (
           <div className="text-center py-4 text-surface-400">
-            <CalendarX className="w-8 h-8 mx-auto mb-2 text-red-300" />
+            <CalendarX className="w-8 h-8 mx-auto mb-2 text-[#991B1B]" />
             <p className="text-sm italic">Termin se nije održao</p>
           </div>
         ) : (
           <>
             <div className="flex items-center gap-6 mb-4">
               <div className="text-center">
-                <Baby className="w-5 h-5 mx-auto text-brand-gold mb-1" />
-                <p className="text-xl font-bold text-brand-gold">
+                <Baby className="w-5 h-5 mx-auto text-surface-600 mb-1" />
+                <p className="text-xl font-bold text-surface-700">
                   {session.childrenCount || '-'}
                 </p>
                 <p className="text-xs text-surface-500">djece</p>
               </div>
               <div className="text-center">
-                <Users className="w-5 h-5 mx-auto text-brand-purple mb-1" />
-                <p className="text-xl font-bold text-brand-purple">
+                <Users className="w-5 h-5 mx-auto text-surface-700 mb-1" />
+                <p className="text-xl font-bold text-surface-900">
                   {session.volunteerCount || '-'}
                 </p>
                 <p className="text-xs text-surface-500">volontera</p>

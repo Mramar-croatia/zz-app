@@ -5,13 +5,13 @@ export default function AchievementBadge({ icon: Icon, label, achieved, descript
   if (!achieved) return null;
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200 rounded-lg">
-      <div className="w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center">
+    <div className="flex items-center gap-2 px-3 py-2 bg-surface-50 border border-surface-200">
+      <div className="w-6 h-6 bg-surface-800 flex items-center justify-center">
         <Icon className="w-3.5 h-3.5 text-white" />
       </div>
       <div>
-        <p className="text-xs font-semibold text-violet-700">{label}</p>
-        {description && <p className="text-xs text-violet-500">{description}</p>}
+        <p className="text-xs font-semibold text-surface-800">{label}</p>
+        {description && <p className="text-xs text-surface-500">{description}</p>}
       </div>
     </div>
   );

@@ -8,14 +8,14 @@ export function TableSkeleton({ rows = 5, cols = 5 }) {
       {/* Header */}
       <div className="flex gap-4">
         {Array.from({ length: cols }).map((_, i) => (
-          <Skeleton key={i} className="h-4 flex-1 rounded" />
+          <Skeleton key={i} className="h-4 flex-1" />
         ))}
       </div>
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <div key={rowIndex} className="flex gap-4">
           {Array.from({ length: cols }).map((_, colIndex) => (
-            <Skeleton key={colIndex} className="h-10 flex-1 rounded" />
+            <Skeleton key={colIndex} className="h-10 flex-1" />
           ))}
         </div>
       ))}
@@ -26,9 +26,9 @@ export function TableSkeleton({ rows = 5, cols = 5 }) {
 export function CardSkeleton() {
   return (
     <div className="card p-5 space-y-3">
-      <Skeleton className="h-4 w-1/3 rounded" />
-      <Skeleton className="h-8 w-2/3 rounded" />
-      <Skeleton className="h-3 w-1/2 rounded" />
+      <Skeleton className="h-4 w-1/3" />
+      <Skeleton className="h-8 w-2/3" />
+      <Skeleton className="h-3 w-1/2" />
     </div>
   );
 }
@@ -46,8 +46,8 @@ export function StatsSkeleton({ count = 4 }) {
 export function ChartSkeleton({ height = 300 }) {
   return (
     <div className="card p-5">
-      <Skeleton className="h-4 w-1/4 rounded mb-4" />
-      <Skeleton className={`w-full rounded`} style={{ height }} />
+      <Skeleton className="h-4 w-1/4 mb-4" />
+      <Skeleton className={`w-full`} style={{ height }} />
     </div>
   );
 }
@@ -57,10 +57,10 @@ export function ListSkeleton({ items = 5 }) {
     <div className="space-y-3">
       {Array.from({ length: items }).map((_, i) => (
         <div key={i} className="card p-4 flex items-center gap-4">
-          <Skeleton className="w-10 h-10 rounded-full flex-shrink-0" />
+          <Skeleton className="w-10 h-10 flex-shrink-0" />
           <div className="flex-1 space-y-2">
-            <Skeleton className="h-4 w-2/3 rounded" />
-            <Skeleton className="h-3 w-1/2 rounded" />
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-3 w-1/2" />
           </div>
         </div>
       ))}
@@ -78,7 +78,7 @@ export function Spinner({ size = 'md', className = '' }) {
 
   return (
     <svg
-      className={`animate-spin text-brand-purple ${sizes[size]} ${className}`}
+      className={`animate-spin text-surface-700 ${sizes[size]} ${className}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

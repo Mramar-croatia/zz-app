@@ -7,10 +7,10 @@ export default function SessionStatsPanel({ totals, sessionCounts, statusFilter 
       <CardContent className="p-4 lg:p-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-purple/10 mb-3">
-              <CalendarCheck className="w-6 h-6 text-brand-purple" />
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+              <CalendarCheck className="w-6 h-6 text-surface-700" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-brand-purple">
+            <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-900">
               {totals.sessions}
             </p>
             <p className="text-sm text-surface-500 mt-1">Aktivnih termina</p>
@@ -22,30 +22,30 @@ export default function SessionStatsPanel({ totals, sessionCounts, statusFilter 
           </div>
 
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-gold/10 mb-3">
-              <Baby className="w-6 h-6 text-brand-gold" />
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+              <Baby className="w-6 h-6 text-surface-600" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-brand-gold">
+            <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-700">
               {totals.children}
             </p>
             <p className="text-sm text-surface-500 mt-1">Djece</p>
           </div>
 
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 mb-3">
-              <Users className="w-6 h-6 text-emerald-600" />
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+              <Users className="w-6 h-6 text-surface-700" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-emerald-600">
+            <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-900">
               {totals.volunteers}
             </p>
             <p className="text-sm text-surface-500 mt-1">Volontera</p>
           </div>
 
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-3">
-              <CalendarX className="w-6 h-6 text-red-500" />
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+              <CalendarX className="w-6 h-6 text-[#991B1B]" />
             </div>
-            <p className="text-3xl lg:text-4xl font-bold text-red-500">
+            <p className="text-3xl lg:text-4xl font-bold tabular-nums text-[#991B1B]">
               {sessionCounts.cancelled}
             </p>
             <p className="text-sm text-surface-500 mt-1">Otkazanih</p>

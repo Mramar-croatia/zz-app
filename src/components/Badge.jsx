@@ -22,7 +22,7 @@ export function LocationBadge({ location, className = '' }) {
   const colors = getLocationColor(location);
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colors.bg} ${colors.text} ${colors.border} ${className}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium border ${colors.bg} ${colors.text} ${colors.border} ${className}`}>
       {location}
     </span>
   );

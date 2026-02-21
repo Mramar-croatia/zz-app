@@ -207,10 +207,10 @@ export default function Baza({ volunteers, sessions = [], loading }) {
           <CardContent className="p-4 lg:p-6">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-purple/10 mb-3">
-                  <Users className="w-6 h-6 text-brand-purple" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+                  <Users className="w-6 h-6 text-surface-600" />
                 </div>
-                <p className="text-3xl lg:text-4xl font-bold text-brand-purple">
+                <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-900">
                   {filteredVolunteers.length}
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Volontera</p>
@@ -222,10 +222,10 @@ export default function Baza({ volunteers, sessions = [], loading }) {
               </div>
 
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 mb-3">
-                  <Activity className="w-6 h-6 text-emerald-600" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+                  <Activity className="w-6 h-6 text-surface-600" />
                 </div>
-                <p className="text-3xl lg:text-4xl font-bold text-emerald-600">
+                <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-900">
                   {activeCount}
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Aktivnih</p>
@@ -242,10 +242,10 @@ export default function Baza({ volunteers, sessions = [], loading }) {
               </div>
 
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 mb-3">
-                  <Clock className="w-6 h-6 text-amber-600" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+                  <Clock className="w-6 h-6 text-surface-600" />
                 </div>
-                <p className="text-3xl lg:text-4xl font-bold text-amber-600">
+                <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-700">
                   {totalHours}
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Ukupno sati</p>
@@ -255,10 +255,10 @@ export default function Baza({ volunteers, sessions = [], loading }) {
               </div>
 
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 mb-3">
-                  <GraduationCap className="w-6 h-6 text-indigo-600" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-surface-100 border border-surface-200 mb-3">
+                  <GraduationCap className="w-6 h-6 text-surface-600" />
                 </div>
-                <p className="text-3xl lg:text-4xl font-bold text-indigo-600">
+                <p className="text-3xl lg:text-4xl font-bold tabular-nums text-surface-700">
                   {filterOptions.schools.length}
                 </p>
                 <p className="text-sm text-surface-500 mt-1">Škola</p>
@@ -276,12 +276,12 @@ export default function Baza({ volunteers, sessions = [], loading }) {
         <CardContent className="p-4 lg:p-5">
           <div className="hidden lg:flex items-center justify-between mb-4 pb-4 border-b border-surface-100">
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 bg-surface-100 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-surface-100 border border-surface-200 p-1">
                 <button
                   onClick={() => setViewMode('table')}
-                  className={`p-2 rounded-md transition-colors ${
+                  className={`p-2 transition-colors ${
                     viewMode === 'table'
-                      ? 'bg-white shadow-sm text-brand-purple'
+                      ? 'bg-white shadow-sm text-surface-900'
                       : 'text-surface-500 hover:text-surface-700'
                   }`}
                   title="Tablični prikaz"
@@ -290,9 +290,9 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                 </button>
                 <button
                   onClick={() => setViewMode('cards')}
-                  className={`p-2 rounded-md transition-colors ${
+                  className={`p-2 transition-colors ${
                     viewMode === 'cards'
-                      ? 'bg-white shadow-sm text-brand-purple'
+                      ? 'bg-white shadow-sm text-surface-900'
                       : 'text-surface-500 hover:text-surface-700'
                   }`}
                   title="Kartični prikaz"
@@ -303,18 +303,18 @@ export default function Baza({ volunteers, sessions = [], loading }) {
 
               <div className="relative group">
                 <button
-                  className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-surface-100 transition-colors"
                   title="Postavke prikaza"
                 >
                   <Settings2 className="w-5 h-5 text-surface-500" />
                 </button>
-                <div className="absolute left-0 top-full mt-2 w-60 bg-white rounded-xl shadow-lg border border-surface-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
+                <div className="absolute left-0 top-full mt-2 w-60 bg-white shadow-lg border border-surface-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
                   <label className="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-50 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={zebraStripes}
                       onChange={e => setZebraStripes(e.target.checked)}
-                      className="w-4 h-4 rounded border-surface-300 text-brand-purple focus:ring-brand-purple"
+                      className="w-4 h-4 rounded border-surface-300 text-surface-700 focus:ring-surface-500"
                     />
                     <span className="text-sm text-surface-700">
                       Izmjenične boje redaka
@@ -325,7 +325,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                       type="checkbox"
                       checked={colorCodedRows}
                       onChange={e => setColorCodedRows(e.target.checked)}
-                      className="w-4 h-4 rounded border-surface-300 text-brand-purple focus:ring-brand-purple"
+                      className="w-4 h-4 rounded border-surface-300 text-surface-700 focus:ring-surface-500"
                     />
                     <span className="text-sm text-surface-700">
                       Boje prema statusu
@@ -336,7 +336,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
 
               <button
                 onClick={() => setShowShortcuts(true)}
-                className="p-2 hover:bg-surface-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-surface-100 transition-colors"
                 title="Tipkovni prečaci (?)"
               >
                 <Keyboard className="w-5 h-5 text-surface-500" />
@@ -353,7 +353,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                   />
                   <button
                     onClick={clearFilters}
-                    className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                    className="text-sm text-surface-700 hover:text-surface-900 underline font-medium"
                   >
                     Ukloni filtere
                   </button>
@@ -419,7 +419,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                 />
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-brand-purple hover:text-brand-purple-dark font-medium"
+                  className="text-sm text-surface-700 hover:text-surface-900 underline font-medium"
                 >
                   Ukloni filtere
                 </button>
@@ -499,11 +499,11 @@ export default function Baza({ volunteers, sessions = [], loading }) {
 
                     const rowBgClasses = [];
                     if (isFocused) {
-                      rowBgClasses.push('bg-brand-purple/10');
+                      rowBgClasses.push('bg-surface-200');
                     } else if (colorCodedRows && status.status === 'dormant') {
-                      rowBgClasses.push('bg-red-50/50');
+                      rowBgClasses.push('bg-[#FFF1F2]/30');
                     } else if (colorCodedRows && status.status === 'inactive') {
-                      rowBgClasses.push('bg-amber-50/30');
+                      rowBgClasses.push('bg-[#FFFBEB]/20');
                     } else if (zebraStripes && index % 2 === 1) {
                       rowBgClasses.push('bg-surface-50/50');
                     }
@@ -714,7 +714,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span
-                          className={`w-2.5 h-2.5 rounded-full ${status.dotColor}`}
+                          className={`w-2.5 h-2.5 inline-block ${status.dotColor}`}
                         />
                         <h3 className="font-semibold text-surface-900 text-lg truncate">
                           <HighlightText text={volunteer.name} search={search} />
@@ -724,12 +724,12 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                         <HighlightText text={volunteer.school} search={search} />
                       </p>
                       <div className="flex items-center gap-1.5 mt-2">
-                        <MapPin className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-surface-500 flex-shrink-0" />
                         <div className="flex flex-wrap gap-1">
                           {volunteer.locations?.slice(0, 2).map((loc, i) => (
                             <span
                               key={i}
-                              className="text-xs font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded"
+                              className="text-xs font-medium text-surface-700 bg-surface-100 border border-surface-200 px-1.5 py-0.5"
                             >
                               {loc}
                             </span>
@@ -745,12 +745,12 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                     <div className="flex items-center gap-3 ml-3">
                       <div className="text-right">
                         <div className="flex items-center gap-1.5 justify-end">
-                          <GraduationCap className="w-4 h-4 text-brand-purple" />
-                          <span className="font-bold text-brand-purple text-lg">
+                          <GraduationCap className="w-4 h-4 text-surface-700" />
+                          <span className="font-bold text-surface-900 text-lg">
                             {volunteer.grade}.
                           </span>
                         </div>
-                        <p className="text-sm font-semibold text-brand-gold mt-1">
+                        <p className="text-sm font-semibold text-surface-700 font-bold mt-1">
                           {volunteer.hours} h
                         </p>
                       </div>
@@ -765,7 +765,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-surface-100 space-y-3 animate-fade-in">
                       <div className="flex items-start gap-2 text-sm">
-                        <MapPin className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                        <MapPin className="w-4 h-4 text-surface-500 mt-0.5 flex-shrink-0" />
                         <div>
                           <span className="text-xs font-medium text-surface-500 uppercase tracking-wide">
                             Lokacije
@@ -781,7 +781,7 @@ export default function Baza({ volunteers, sessions = [], loading }) {
                         <Phone className="w-4 h-4 text-surface-400" />
                         <a
                           href={`tel:${volunteer.phone}`}
-                          className="text-brand-purple font-mono"
+                          className="text-surface-700 font-mono"
                           onClick={e => e.stopPropagation()}
                         >
                           {volunteer.phone}
